@@ -11,4 +11,7 @@
     plugins: [
       require('daisyui'),
     ],
+    daisyui: {
+      themes: ["dracula"],
+    },
   }
