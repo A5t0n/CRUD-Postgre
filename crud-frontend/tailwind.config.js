@@ -12,6 +12,6 @@
       require('daisyui'),
     ],
     daisyui: {
-      themes: ["dracula"],
+      themes: ["night"],
     },
   }
