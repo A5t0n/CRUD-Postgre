@@ -2,16 +2,35 @@ import { useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import Navbar from './components/Navbar'
-import Tablelist from './components/Tablelist'
+import NavBar from './components/Navbar'
+import TableList from './components/Tablelist'
+import ModelForm from './components/ModelForm'
 
 function App() {
+
+  const[isOpen,setIsOpen]=useState(false);
+  const[modelMode,setModelMode]=useState('add');
+
+  const handleOpen = (mode)=>{
+    setIsOpen(true);
+  }
+
+  const handleSubmit = ()=>{
+    if(modelMode==='add'){
+      console.log('model mode Add');
+    }
+    else{
+      console.log('model mode Edit');
+    }
+  }
+
   return (
     <>
-     <Navbar/>
-     <Tablelist/>
+     <NavBar onOpen={()=> handleOpen('add')} />
+     <TableList/>
+     <ModelForm isOpen={isOpen} onClose={()=>setIsOpen(false)}/>
     </>
   )
 }
 
-export default App
+export default App;

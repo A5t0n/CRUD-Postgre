@@ -1,4 +1,4 @@
-export default function Tablelist() {
+export default function TableList() {
 
     const clients=[
         {id:1, name: "Cy Ganderton",email:"johndoes@gmail.com" ,job: "Quality Control Specialist", rate:"100",isactive:true},
@@ -25,12 +25,22 @@ export default function Tablelist() {
 
                 {clients.map((client)=>(
                     <tr>
-                    <th>{client.id}</th>
-                    <td>{client.name}</td>
-                    <td>{client.email}</td>
-                    <td>{client.job}</td>
-                    <td>{client.rate}</td>
-                    <td> </td>
+                        <th>{client.id}</th>
+                        <td>{client.name}</td>
+                        <td>{client.email}</td>
+                        <td>{client.job}</td>
+                        <td>{client.rate}</td>
+                        <td> 
+                            <button className={`btn rounded-full w-20 ${client.isactive ? `btn-primary` : `btn-outline btn-primary`}`}>
+                                {client.isactive ? `Active` : `Inactive`}
+                            </button>
+                        </td>
+                        <td>
+                            <button className="btn btn-secondary">Update</button>
+                        </td>
+                        <td>
+                            <button className="btn btn-accent">Delete</button>
+                        </td>
                     </tr>
                 ))}
                 </tbody>
