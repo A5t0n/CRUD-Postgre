@@ -28,7 +28,11 @@ function App() {
     <>
      <NavBar onOpen={()=> handleOpen('add')} />
      <TableList/>
-     <ModelForm isOpen={isOpen} onClose={()=>setIsOpen(false)}/>
+     <ModelForm 
+     isOpen={isOpen} 
+     OnSubmit={handleSubmit}
+     onClose={()=>setIsOpen(false)}
+     mode={modelMode}/>
     </>
   )
 }
