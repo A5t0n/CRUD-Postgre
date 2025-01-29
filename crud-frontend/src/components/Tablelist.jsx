@@ -1,4 +1,4 @@
-export default function TableList({handleOpn}) {
+export default function TableList({handleOpen}) {
 
     const clients=[
         {id:1, name: "Cy Ganderton",email:"johndoes@gmail.com" ,job: "Quality Control Specialist", rate:"100",isactive:true},
@@ -13,7 +13,7 @@ export default function TableList({handleOpn}) {
                 <thead>
                 <tr>
                     <th></th>
-                    <th>id</th>
+                    <th></th>
                     <th>Name</th>
                     <th>Email</th>
                     <th>Job</th>
@@ -32,7 +32,7 @@ export default function TableList({handleOpn}) {
                         <td>{client.rate}</td>
                         <td> 
                             <button className={`btn rounded-full w-20 ${client.isactive ? `btn-primary` : `btn-outline btn-primary`}`}>
-                                {client.isactive ? `Active` : `Inactive`}
+                                {client.isactive ? 'Active' : 'Inactive'}
                             </button>
                         </td>
                         <td>
