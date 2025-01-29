@@ -30,7 +30,7 @@ function App() {
      <TableList/>
      <ModelForm 
      isOpen={isOpen} 
-     OnSubmit={handleSubmit}
+     onSubmit={handleSubmit}
      onClose={()=>setIsOpen(false)}
      mode={modelMode}/>
     </>
