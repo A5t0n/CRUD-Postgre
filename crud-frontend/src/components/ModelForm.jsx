@@ -10,6 +10,7 @@ export default function ModelForm({isOpen, onClose, mode, onSubmit, clientData})
     const handleStatusChange= (e)=>{
         setStatus(e.target.value==='Active');
     }
+    
 
     const handleSubmit = async(e)=>{
         e.preventDefault();

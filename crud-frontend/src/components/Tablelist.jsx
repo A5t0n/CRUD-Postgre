@@ -1,28 +1,28 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
-export default function TableList({handleOpen, searchTerm}) {
+export default function TableList({handleOpen, searchTerm, setTableData, tableData}) {
 
-    const [tableData, setTableData] = useState([]);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/api/clients');
-                setTableData(response.data);
-            } catch (err) {
-                setError(err.message);
-            }
-        };
-        fetchData();
-    },[]);
 
     const filterData = tableData.filter((client) => {
         return client.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
             client.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
             client.job.toLowerCase().includes(searchTerm.toLowerCase());
     });
+
+    const handleDelete = async (id) => {
+        const confirmDelete = window.confirm('Are you sure you want to delete this client?');
+        if (confirmDelete) {
+            try {
+                await axios.delete(`http://localhost:3000/api/clients/${id}`);
+                setTableData((prevData) => prevData.filter((client) => client.id !== id));
+            } catch (err) {
+                setError(err.message);
+            }
+        }
+    };
 
     const clients=[
         {id:1, name: "Cy Ganderton",email:"johndoes@gmail.com" ,job: "Quality Control Specialist", rate:"100",isactive:true},
@@ -38,7 +38,7 @@ export default function TableList({handleOpen, searchTerm}) {
                 <thead>
                 <tr>
                     <th></th>
-                    <th></th>
+                    {/* <th></th> */}
                     <th>Name</th>
                     <th>Email</th>
                     <th>Job</th>
@@ -64,7 +64,7 @@ export default function TableList({handleOpen, searchTerm}) {
                             <button onClick={()=> handleOpen('edit', client)} className="btn btn-secondary">Update</button>
                         </td>
                         <td>
-                            <button className="btn btn-accent">Delete</button>
+                            <button className="btn btn-accent" onClick={()=>handleDelete(client.id)}>Delete</button>
                         </td>
                     </tr>
                 ))}
