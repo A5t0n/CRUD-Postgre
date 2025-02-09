@@ -5,11 +5,15 @@ import './App.css'
 import NavBar from './components/Navbar'
 import TableList from './components/Tablelist'
 import ModelForm from './components/ModelForm'
+import { useEffect } from 'react'
+import axios from 'axios'
 
 function App() {
 
   const[isOpen,setIsOpen]=useState(false);
   const[modelMode,setModelMode]=useState('add');
+  const [searchTerm, setSearchTerm] = useState('');
+
 
   const handleOpen = (mode)=>{
     setIsOpen(true);
@@ -26,8 +30,8 @@ function App() {
 
   return (
     <>
-     <NavBar onOpen={()=> handleOpen('add')} />
-     <TableList/>
+     <NavBar onOpen={()=> handleOpen('add')} onSearch={setSearchTerm}/>
+     <TableList handleOpen={handleOpen} searchTerm={searchTerm}/>
      <ModelForm 
      isOpen={isOpen} 
      onSubmit={handleSubmit}
