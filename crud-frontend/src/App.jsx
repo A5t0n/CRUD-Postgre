@@ -13,14 +13,26 @@ function App() {
   const[isOpen,setIsOpen]=useState(false);
   const[modelMode,setModelMode]=useState('add');
   const [searchTerm, setSearchTerm] = useState('');
+  const [clientData, setClientData] = useState([]);
 
 
   const handleOpen = (mode)=>{
     setIsOpen(true);
   }
 
-  const handleSubmit = ()=>{
+  const handleSubmit = async(newClientData)=>{
+
     if(modelMode==='add'){
+
+      try{
+        const response= await axios.post('http://localhost:3000/api/clients', newClientData);
+        console.log('Client added:', response.data);
+      }
+      catch(e){
+        console.log('Error adding client', e);
+      }
+
+
       console.log('model mode Add');
     }
     else{
@@ -36,7 +48,7 @@ function App() {
      isOpen={isOpen} 
      onSubmit={handleSubmit}
      onClose={()=>setIsOpen(false)}
-     mode={modelMode}/>
+     mode={modelMode} clientData={clientData}/>
     </>
   )
 }

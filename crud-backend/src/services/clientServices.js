@@ -5,13 +5,13 @@ export const getClients = async () => {
     return rows;
 };
 
-export const createClients = async (clientData) => {
+export const createClient = async (clientData) => {
 
     const {name, email, job, rate, isActive} = clientData;
 
     const{rows} = await query(`
         INSERT INTO clients_tb (name, email, job, rate, isActive)
-        VALUES ($1, $2, $3, $4, $5) RETURNING *`
+        VALUES ($1, $2, $3, $4, $5) RETURNING *`,
          [name, email, job, rate, isActive]);
     return rows[0];
 };
