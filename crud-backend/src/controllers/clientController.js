@@ -53,3 +53,16 @@ export const deleteClient   = async (req, res) => {
         res.status(500).json({message: err.message});
     }
 }
+
+export const searchClients = async (req, res) => {
+    try{
+        const searchTerm = req.query.q;
+        const clients = await clientService.searchClients(searchTerm);
+
+        res.status(200).json(clients);
+    }
+    catch(err){
+        console.error('Error searching clients', err);
+        res.status(500).json({message: err.message});
+    }
+}

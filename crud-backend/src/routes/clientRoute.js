@@ -12,4 +12,6 @@ router.put("/clients/:id", clientController.updateClient);
 
 router.delete("/clients/:id", clientController.deleteClient);
 
+router.get("/clients/search", clientController.searchClients);
+
 export default router;
