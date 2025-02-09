@@ -3,8 +3,8 @@ import env from 'dotenv';
 
 env.config();
 
-console.log("DB User:", process.env.PG_USER);
-console.log("DB Password:", process.env.PG_PASSWORD);
+// console.log("DB User:", process.env.PG_USER);
+// console.log("DB Password:", process.env.PG_PASSWORD);
 
 
 const db = new pg.Client({
