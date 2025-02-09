@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-export default function ModelForm({isOpen, onClose, mode, onSubmit}) {
+import React, {useEffect, useState} from 'react';
+export default function ModelForm({isOpen, onClose, mode, onSubmit, clientData}) {
 
     const[rate, setRate] = useState('');
     const[name, setName] = useState('');
@@ -10,11 +10,36 @@ export default function ModelForm({isOpen, onClose, mode, onSubmit}) {
     const handleStatusChange= (e)=>{
         setStatus(e.target.value==='Active');
     }
+    
 
-    const handleSubmit = (e)=>{
+    const handleSubmit = async(e)=>{
         e.preventDefault();
+        try{
+            const clientData = {name, email, job, rate: Number(rate), isActive:status};
+            await onSubmit(clientData);
+            console.log('Client added:', clientData);
+        }
+        catch(e){
+            console.log('Error adding client', e);
+        }
         onClose();
     }
+
+    useEffect(()=>{
+        if(mode==='edit' && clientData){
+            setName(clientData.name);
+            setEmail(clientData.email);
+            setJob(clientData.job);
+            setRate(clientData.rate);
+            setStatus(clientData.isActive);
+        }else{
+            setName('');
+            setEmail('');
+            setJob('');
+            setRate('');
+            setStatus(false);
+        }
+    },[mode, clientData]);
 
 
     return(
