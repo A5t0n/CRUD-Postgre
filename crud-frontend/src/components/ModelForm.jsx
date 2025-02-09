@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 export default function ModelForm({isOpen, onClose, mode, onSubmit, clientData}) {
 
     const[rate, setRate] = useState('');
@@ -23,6 +23,22 @@ export default function ModelForm({isOpen, onClose, mode, onSubmit, clientData})
         }
         onClose();
     }
+
+    useEffect(()=>{
+        if(mode==='edit' && clientData){
+            setName(clientData.name);
+            setEmail(clientData.email);
+            setJob(clientData.job);
+            setRate(clientData.rate);
+            setStatus(clientData.isActive);
+        }else{
+            setName('');
+            setEmail('');
+            setJob('');
+            setRate('');
+            setStatus(false);
+        }
+    },[mode, clientData]);
 
 
     return(

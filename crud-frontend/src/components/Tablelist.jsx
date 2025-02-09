@@ -49,7 +49,7 @@ export default function TableList({handleOpen, searchTerm}) {
                 <tbody className="hover">
 
                 {filterData.map((client)=>(
-                    <tr>
+                    <tr key={client.id}>
                         <th>{client.id}</th>
                         <td>{client.name}</td>
                         <td>{client.email}</td>
@@ -61,7 +61,7 @@ export default function TableList({handleOpen, searchTerm}) {
                             </button>
                         </td>
                         <td>
-                            <button onClick={()=> handleOpen('edit')} className="btn btn-secondary">Update</button>
+                            <button onClick={()=> handleOpen('edit', client)} className="btn btn-secondary">Update</button>
                         </td>
                         <td>
                             <button className="btn btn-accent">Delete</button>

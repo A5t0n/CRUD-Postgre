@@ -7,6 +7,7 @@ import TableList from './components/Tablelist'
 import ModelForm from './components/ModelForm'
 import { useEffect } from 'react'
 import axios from 'axios'
+import { set } from 'mongoose'
 
 function App() {
 
@@ -16,7 +17,9 @@ function App() {
   const [clientData, setClientData] = useState([]);
 
 
-  const handleOpen = (mode)=>{
+  const handleOpen = (mode, client)=>{
+    setClientData(client);
+    setModelMode(mode);
     setIsOpen(true);
   }
 
@@ -37,6 +40,15 @@ function App() {
     }
     else{
       console.log('model mode Edit');
+      console.log('Updating Client with ID:',clientData.id);
+
+      try{
+        const response= await axios.put(`http://localhost:3000/api/clients/${clientData.id}`, newClientData);
+        console.log('Client updated:', response.data);
+      }
+      catch(e){
+        console.log('Error updating client', e);
+      }
     }
   }
 
